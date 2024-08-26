@@ -1,7 +1,31 @@
-# Dockerfile for book_catalog microservice
-FROM python:3.10-slim
-WORKDIR /app
-COPY . /app
-CMD ["python", "app.py"]
+name: Build Docker Image
+
+on:
+  push:
+    branches:
+      - main
+  pull_request:
+    branches:
+      - main
+
+jobs:
+  build:
+    runs-on: ubuntu-latest
+
+    steps:
+      - name: Checkout code
+        uses: actions/checkout@v3
+
+      - name: Set up Docker Buildx
+        uses: docker/setup-buildx-action@v2
+
+      - name: Build Docker image
+        uses: docker/build-push-action@v3
+        with:
+          context: .
+          file: ./Dockerfile
+          push: false
+          tags: my-image-name:latest
+
 
 
