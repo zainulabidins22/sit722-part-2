@@ -2,19 +2,19 @@
 apiVersion: apps/v1
 kind: Deployment
 metadata:
-  name: book-catalog-deployment
+  name: my-app-deployment
 spec:
-  replicas: 1
+  replicas: 3
   selector:
     matchLabels:
-      app: book-catalog
+      app: my-app
   template:
     metadata:
       labels:
-        app: book-catalog
+        app: my-app
     spec:
       containers:
-      - name: book-catalog
-        image: <your-docker-image>
+      - name: my-app-container
+        image: my-app-image:latest
         ports:
-        - containerPort: 5000
+        - containerPort: 80
